@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<section class="page-section" id="single-wishlist">
+    <div class="container-custom px-4 px-lg-5">
+
+        <form action="" method="POST">{% csrf_token %}
+            <p>Are you sure you want to delete "{{object}}"?</p>
+            <a href="{% url 'wishlists' %}">
+                Cancel
+            </a>
+            <input type="submit" value="Confirm">
+        </form>
+
+    </div>
+</section>
+
+{% endblock %}

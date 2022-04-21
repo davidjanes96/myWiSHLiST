@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<section class="page-section" id="single-wishlist">
+    <div class="container-custom px-4 px-lg-5">
+
+        <h1>Wishlist Form</h1>
+
+        <form action="" method="POST">{% csrf_token %}
+            
+            {% for field in form %}
+                <p>{{field.label}}: {{field}}</p>
+
+            {% endfor %}
+
+            <input type="submit">
+
+        </form>
+
+    </div>
+</section>
+
+{% endblock %}
