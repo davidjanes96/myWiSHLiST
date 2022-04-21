@@ -60,52 +60,31 @@
                                 <a href="{{product.url}}" target="_blank"  class="fs-7 overflow-hidden">{{product.url}}</a>
                             </div>
                             <div>
+                                <p class="d-inline float-start mb-0 mt-2 text-muted fs-7">{{product.get_priority_display}} priority</p>
                                 <a href="{% url 'delete-product' wishlist.id product.id %}" class="d-inline float-end mx-2" style="color: black; font-size: x-large;"><i class="bi bi-trash"></i></a>
                                 <a href="{% url 'update-product' wishlist.id product.id %}" class="d-inline float-end mx-2" style="color: black; font-size: x-large;"><i class="bi bi-pen"></i></a> 
+                                <p class="d-inline float-end mb-0 me-4" style="color: black; font-size: x-large;">{{product.quantity}}</p>
                             </div>
                             
                         </div>
                     </div>
                 </div>
                 {% endfor %}
+
                 {% else %}
                 <div class="p-2">
                     <h5>There are no items on this wishlist yet.</h5>
                 </div>
                 
                 {% endif %}
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center py-3">
                     <a href="{% url 'create-product' wishlist.id %}"><button class="btn btn-dark fs-6"><i class="bi bi-plus"></i> Add New</button></a>
                 </div>
 
-                <div class="card p-2 mb-2 shadow-sm">
-                    <table class="table table-striped">
-                        <thead>
-                          <tr>
-                            <th scope="col" >#</th>
-                            <th scope="col">Product</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Total Price</th>
-                            <th scope="col">Currency</th>
-                            <th scope="col">Priority</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            {% for product in wishlist.product_set.all %}
-                          <tr>
-                            <th scope="row"><i class="bi bi-list"></i></th>
-                            <td>{{product.name}}</td>
-                            <td>{{product.price}}</td>
-                            <td>{{product.quantity}}</td>
-                            <td>{{product.total_price}}</td>
-                            <td>{{product.currency.tag}}</td>
-                            <td>{{product.get_priority_display}}</td>
-                          </tr>
-                            {% endfor %}
-                        </tbody>
-                      </table>
+                <div class="d-flex justify-content-end">
+                    <h2>Total: {{wishlist.grand_total_price}}</h2>
                 </div>
+
             </div>
         </div>
         
