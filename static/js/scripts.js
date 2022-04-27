@@ -11,12 +11,13 @@ window.addEventListener('DOMContentLoaded', event => {
     // Navbar shrink function
     var pageURL = "http://127.0.0.1:8000/home/";
     var pageURL2 = "http://127.0.0.1:8000/";
+    var pageURL3 = "http://127.0.0.1:8000/account/";
     var navbarShrink = function () {
         const navbarCollapsible = document.body.querySelector('#mainNav');
         if (!navbarCollapsible) {
             return;
         }
-        if (window.scrollY === 0 && window.location.href == pageURL || window.location.href == pageURL2) {
+        if (window.scrollY === 0 && (window.location.href == pageURL || window.location.href == pageURL2 || window.location.href == pageURL3)) {
             navbarCollapsible.classList.remove('navbar-shrink')
             
         } else {

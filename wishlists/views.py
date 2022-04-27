@@ -3,16 +3,20 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from .models import Wishlist
 from .forms import WishlistForm, ProductForm
 
+
+@login_required(login_url="login")
 def get_all_wishlists(request):
     wishlists = Wishlist.objects.all()
     context = {'wishlists': wishlists, }
     return render(request, 'wishlists/wishlists.html', context)
 
 
+@login_required(login_url="login")
 def get_wishlist_details(request, pk):
     wishlists = Wishlist.objects.all()
     wishlist = Wishlist.objects.get(id=pk)
@@ -23,7 +27,7 @@ def get_wishlist_details(request, pk):
     return render (request, 'wishlists/wishlist.html', context)
 
 
-
+@login_required(login_url="login")
 def create_wishlist(request):
     form = WishlistForm()
 
@@ -37,7 +41,7 @@ def create_wishlist(request):
     return render(request, 'wishlists/wishlist_form.html', context)
 
 
-
+@login_required(login_url="login")
 def update_wishlist(request, pk):
     wishlist = Wishlist.objects.get(id=pk)
     form = WishlistForm(instance = wishlist)
@@ -52,6 +56,7 @@ def update_wishlist(request, pk):
     return render(request, 'wishlists/wishlist_form.html', context)
 
 
+@login_required(login_url="login") 
 def delete_wishlist(request, pk):
     wishlist = Wishlist.objects.get(id=pk)
     if request.method == 'POST':
@@ -62,6 +67,7 @@ def delete_wishlist(request, pk):
     return render(request, 'wishlists/delete_template.html', context)
 
 
+@login_required(login_url="login") 
 def create_product(request, pk):
     wishlist = Wishlist.objects.get(id=pk)
     form = ProductForm()
@@ -82,7 +88,7 @@ def create_product(request, pk):
     return render(request, 'wishlists/product_form.html', context)
 
 
-
+@login_required(login_url="login") 
 def update_product(request, pk, productPK):
     wishlist = Wishlist.objects.get(id=pk)
     product = wishlist.product_set.get(id=productPK)
@@ -105,6 +111,7 @@ def update_product(request, pk, productPK):
     return render(request, 'wishlists/product_form.html', context)
 
 
+@login_required(login_url="login") 
 def delete_product(request, pk, productPK):
     wishlist = Wishlist.objects.get(id=pk)
     product = wishlist.product_set.get(id=productPK)

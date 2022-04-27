@@ -10,6 +10,7 @@ urlpatterns = [
     path('', views.home_view, name="home"),
     path('home/', views.home_view, name="home"),
     path('', include('wishlists.urls')),
+    path('', include('account.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

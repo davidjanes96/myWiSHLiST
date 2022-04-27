@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<section class="page-section" id="login">
+    <div class="container-custom px-4 px-lg-5">
+        <form action="{% url 'login' %}" method="POST">{% csrf_token %}
+            <input type="text" name="username" placeholder="Username"/>
+            <input type="password" name="password" placeholder="Enter password"/>
+            <input type="submit" value="Login"/>
+        </form>
+    </div>
+</section>
+
+{% endblock content %}

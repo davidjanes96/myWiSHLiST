@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 import uuid
-
+from account.models import Account
 
 
 class Wishlist(models.Model):
@@ -12,6 +12,7 @@ class Wishlist(models.Model):
         high = 5, _('High')
 
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    owner = models.ForeignKey(Account, null=True, blank=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=200)
     priority = models.IntegerField(choices=PriorityChoices.choices, default=PriorityChoices.low)
     created = models.DateTimeField(auto_now_add=True)
@@ -70,4 +71,4 @@ class Currency(models.Model):
     name = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.name
+        return self.tag

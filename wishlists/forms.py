@@ -11,3 +11,42 @@ class ProductForm(ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'price', 'quantity', 'currency', 'url', 'priority']
+
+
+    def __init__(self, *args, **kwargs):
+        super(ProductForm, self).__init__(*args, **kwargs)
+
+        self.fields['name'].widget.attrs.update({
+            'class': 'form-control',
+            'id': 'item',
+            'type': 'text',
+            'placeholder': 'Enter item name...'
+        })
+        self.fields['price'].widget.attrs.update({
+            'class': 'form-control',
+            'id': 'price',
+            'type': 'number',
+            'placeholder': 'Enter item price...'
+        })
+        self.fields['currency'].empty_label = 'Currency'
+        self.fields['currency'].widget.attrs.update({
+            'class': 'form-select pt-2',
+            'id': 'currency',
+        })
+        self.fields['quantity'].widget.attrs.update({
+            'class': 'form-control',
+            'id': 'quantity',
+            'type': 'number',
+            'placeholder': 'Enter item quantity...'
+        })
+        self.fields['url'].widget.attrs.update({
+            'class': 'form-control',
+            'id': 'url',
+            'type': 'text',
+            'placeholder': 'Enter item url...'
+        })
+        self.fields['priority'].widget.attrs.update({
+            'class': 'form-select',
+            'id': 'priority',
+        })
+ 

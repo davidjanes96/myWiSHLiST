@@ -2,22 +2,64 @@
 
 {% block content %}
 
-<section class="page-section" id="single-product">
-    <div class="container-custom px-4 px-lg-5">
+<section class="page-section" id="contact">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 col-xl-6 text-center">
+                <h2 class="mt-0">Add item</h2>
+                <hr class="divider" />
+                <p class="text-muted mb-5">Fill out the fields to add the item to your wishlist!</p>
+            </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+            <div class="col-lg-6">
+                <!-- FORM -->
+                <form id="productForm" action="" method="POST">{% csrf_token %}
+                    <!-- Name input-->
+                    <div class="form-floating mb-3">
+                        {{form.name}}
+                        <label for="item">Item</label>
+                    </div>
 
-        <h1>Product Form</h1>
-
-        <form action="" method="POST">{% csrf_token %}
-            
-            {% for field in form %}
-                <p>{{field.label}}: {{field}}</p>
-
-            {% endfor %}
-
-            <input type="submit">
-
-        </form>
+                    <div class="row">
+                        <div class="col-9">
+                            <!-- Price input-->
+                            <div class="form-floating mb-3">
+                                {{form.price}}
+                                <label for="price">Price</label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <!-- Currency input -->
+                                <div class="form-floating mb-3">
+                                    {{form.currency}}
+                                </div>                               
+                        </div> 
+                    </div>
+                    <!-- Quantity input -->
+                    <div class="form-floating mb-3">
+                        {{form.quantity}}
+                        <label for="quantity">Quantity</label>
+                    </div>
+                    <!-- URL  input-->
+                    <div class="form-floating mb-3">
+                        {{form.url}}
+                        <label for="url">URL</label>
+                    </div>
+                    <!-- Priority input -->
+                    <div class="form-floating mb-3">
+                        {{form.priority}}
+                        <label for="priority">Priority</label>
+                    </div>  
+                    
+                    <!-- Submit Button-->
+                    <div class="d-grid pb-3"><button class="btn btn-primary btn-xl" id="submitButton" type="submit">Submit</button></div>
+                    <div class="d-grid"><button class="btn btn-danger btn-xl" id="cancelButton" onclick="history.back()">Cancel</button></div>
+                </form>
+            </div>
+        </div>
     </div>
-</section>    
+</section>
+
 
 {% endblock %}
