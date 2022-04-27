@@ -7788,6 +7788,11 @@ textarea.form-control-lg {
   color: rgba(var(--bs-dark-rgb), var(--bs-text-opacity)) !important;
 }
 
+.text-dark:hover {
+  --bs-text-opacity: 1;
+  color: #159ad8 !important;
+}
+
 .text-black {
   --bs-text-opacity: 1;
   color: rgba(var(--bs-black-rgb), var(--bs-text-opacity)) !important;
@@ -11447,25 +11452,41 @@ header.masthead-custom {
   background-attachment: scroll;
   background-size: cover;
 }
-header.masthead h1, header.masthead .h1, header.masthead-custom h1, header.masthead-custom .h1 {
+header.masthead-register {
+  padding-top: 10rem;
+  padding-bottom: calc(10rem - 4.5rem);
+  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("/static/images/cover_three.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+header.masthead h1, header.masthead .h1, 
+header.masthead-custom h1, header.masthead-custom .h1, 
+header.masthead-register h1, header.masthead-register .h1 {
   font-size: 2.25rem;
 }
 @media (min-width: 992px) {
-  header.masthead, header.masthead-custom {
+  header.masthead, header.masthead-custom, header.masthead-register {
     height: 100vh;
     min-height: 40rem;
     padding-top: 4.5rem;
     padding-bottom: 0;
   }
-  header.masthead p, header.masthead-custom p {
+  header.masthead p, header.masthead-custom p, header.masthead-register p {
     font-size: 1.15rem;
   }
-  header.masthead h1, header.masthead .h1, header.masthead-custom h1, header.masthead-custom .h1 {
+  header.masthead h1, header.masthead .h1, 
+  header.masthead-custom h1, header.masthead-custom .h1,
+  header.masthead-register h1, header.masthead-register .h1 {
     font-size: 3rem;
   }
 }
 @media (min-width: 1200px) {
-  header.masthead h1, header.masthead .h1, header.masthead-custom h1, header.masthead-custom .h1 {
+  header.masthead h1, header.masthead .h1, 
+  header.masthead-custom h1, header.masthead-custom .h1,
+  header.masthead-register h1, header.masthead-register .h1 {
     font-size: 3.5rem;
   }
 }
@@ -11535,6 +11556,14 @@ header.masthead h1, header.masthead .h1, header.masthead-custom h1, header.masth
 
 .card-account {
   width: 350px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  border-color: rgba(0, 0, 0, 0.5);
+}
+
+.card-register {
+  width: 600px;
   border-radius: 50px;
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);

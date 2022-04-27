@@ -10,11 +10,10 @@
             <ul class="navbar-nav ms-auto my-2 my-lg-0">
                 {% url 'wishlists' as url_wishlists %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
-                <li class="nav-item"><a class="nav-link {% if request.path == url_wishlists %} active {% endif %}" href="{% url 'wishlists' %}">Wishlists</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'account' %}">Account</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'create-wishlist' %}">Add Wishlist</a></li>
 
                 {% if request.user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link {% if request.path == url_wishlists %} active {% endif %}" href="{% url 'wishlists' %}">My wishlists</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'account' %}">Account</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
                 {% else %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>

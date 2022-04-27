@@ -6,6 +6,21 @@ class WishlistForm(ModelForm):
         model = Wishlist
         fields = ['title', 'priority']
 
+    def __init__(self, *args, **kwargs):
+        super(WishlistForm, self).__init__(*args, **kwargs)
+
+        self.fields['title'].widget.attrs.update({
+            'class': 'form-control',
+            'id': 'title',
+            'type': 'text',
+            'placeholder': 'Enter wishlist name...',
+        })
+        self.fields['priority'].widget.attrs.update({
+            'class': 'form-select',
+            'id': 'priority',
+        })
+
+
 
 class ProductForm(ModelForm):
     class Meta:
