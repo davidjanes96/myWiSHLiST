@@ -35,7 +35,7 @@ def registerUser(request):
             return redirect('home')
         
         else:
-            messages.success(request, 'An error has occured during registration.')
+            messages.error(request, 'An error has occured during registration.')
 
     context = {
         'page': page,
@@ -64,6 +64,7 @@ def loginUser(request):
 
         if user is not None:
             login(request, user)
+            messages.success(request, 'Logged in successfully!')
             return redirect('home')
         else:
             messages.error(request, 'Username or password is incorrect.')
@@ -72,7 +73,7 @@ def loginUser(request):
 
 def logoutUser(request):
     logout(request)
-    messages.error(request, 'Successfully logged out.')
+    messages.info(request, 'Successfully logged out.')
     return redirect('home')
 
 

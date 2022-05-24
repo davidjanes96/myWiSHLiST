@@ -2176,6 +2176,12 @@ progress {
   margin-bottom: 0.5rem;
 }
 
+.form-icon {
+  position: absolute;
+  right: 14px !important; 
+  top: 14px !important;
+}
+
 .col-form-label {
   padding-top: calc(0.375rem + 1px);
   padding-bottom: calc(0.375rem + 1px);
@@ -4930,11 +4936,18 @@ textarea.form-control-lg {
 }
 
 .alert {
-  position: relative;
+  position: fixed;
   padding: 1rem 1rem;
   margin-bottom: 1rem;
   border: 1px solid transparent;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
+  max-width: max-content;
+}
+
+.alert-position {
+  left: 4%;
+  right: 4%;
+  bottom: 2%;
 }
 
 .alert-heading {
@@ -4957,9 +4970,9 @@ textarea.form-control-lg {
 }
 
 .alert-primary {
-  color: #923b23;
-  background-color: #fde0d8;
-  border-color: #fcd0c4;
+  color: #084298;
+  background-color: #cfe2ff;
+  border-color: #b6d4fe;
 }
 .alert-primary .alert-link {
   color: #752f1c;
@@ -5800,7 +5813,7 @@ textarea.form-control-lg {
   word-spacing: normal;
   white-space: normal;
   line-break: auto;
-  font-size: 0.875rem;
+  font-size: 0.675rem;
   word-wrap: break-word;
   opacity: 0;
 }
@@ -5873,7 +5886,7 @@ textarea.form-control-lg {
 }
 
 .tooltip-inner {
-  max-width: 200px;
+  max-width: 400px;
   padding: 0.25rem 0.5rem;
   color: #fff;
   text-align: center;
@@ -11451,8 +11464,18 @@ header.masthead-custom {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
+
 }
 header.masthead-register {
+  padding-top: 10rem;
+  padding-bottom: calc(10rem - 4.5rem);
+  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("/static/images/cover_three.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+header.masthead-login {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 4.5rem);
   background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("/static/images/cover_three.jpg");
@@ -11464,30 +11487,45 @@ header.masthead-register {
 
 header.masthead h1, header.masthead .h1, 
 header.masthead-custom h1, header.masthead-custom .h1, 
-header.masthead-register h1, header.masthead-register .h1 {
+header.masthead-register h1, header.masthead-register .h1,
+header.masthead-login h1, header.masthead-login .h1 {
   font-size: 2.25rem;
 }
 @media (min-width: 992px) {
-  header.masthead, header.masthead-custom, header.masthead-register {
+  header.masthead, header.masthead-custom, header.masthead-login {
     height: 100vh;
     min-height: 40rem;
     padding-top: 4.5rem;
     padding-bottom: 0;
   }
-  header.masthead p, header.masthead-custom p, header.masthead-register p {
+  header.masthead-register {
+    height: auto;
+    min-height: 100vh;
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+  }
+  header.masthead p, header.masthead-custom p, header.masthead-register p, header.masthead-login p {
     font-size: 1.15rem;
   }
   header.masthead h1, header.masthead .h1, 
   header.masthead-custom h1, header.masthead-custom .h1,
-  header.masthead-register h1, header.masthead-register .h1 {
+  header.masthead-register h1, header.masthead-register .h1,
+  header.masthead-login h1, header.masthead-login .h1 {
     font-size: 3rem;
   }
 }
 @media (min-width: 1200px) {
   header.masthead h1, header.masthead .h1, 
   header.masthead-custom h1, header.masthead-custom .h1,
-  header.masthead-register h1, header.masthead-register .h1 {
+  header.masthead-register h1, header.masthead-register .h1,
+  header.masthead-login h1, header.masthead-login .h1 {
     font-size: 3.5rem;
+  }
+  header.masthead-register {
+    height: auto;
+    min-height: 100vh;
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
   }
 }
 

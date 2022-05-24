@@ -61,4 +61,18 @@ window.addEventListener('DOMContentLoaded', event => {
 
 });
 
+// Tooltips
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
 
+
+// Alerts fade out
+setTimeout(function () {
+  
+    // Closing the alert
+    $(".alert").delay(5000).slideUp(800, function() {
+        $(this).alert('close');
+    });
+});
