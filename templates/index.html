@@ -26,6 +26,7 @@
 
 
 {% if user.is_authenticated %}
+{% if wishlists %}
 <!-- WishList Title -->
 <section class="page-section-custom" id="wishlists">
     <div class="container px-4 px-lg-5">
@@ -133,6 +134,7 @@
     </div>
 
 </section>
+{% endif %}
 {% endif %}
 
 {% endblock %}

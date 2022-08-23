@@ -1,6 +1,8 @@
+from dataclasses import fields
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Account
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -52,4 +54,33 @@ class CustomUserCreationForm(UserCreationForm):
             'id': 'password2',
             'type': 'password',
             'placeholder': 'Confirm password...'
+        })
+
+
+class AccountForm(ModelForm):
+    class Meta:
+        model = Account
+        fields = ['name', 'username', 'email']
+
+    def __init__(self, *args, **kwargs):
+        super(AccountForm, self).__init__(*args, **kwargs)
+        self.fields['name'].label = 'Full Name'
+        self.fields['name'].widget.attrs.update({
+            'class': 'form-control',
+            'id': 'name',
+            'type': 'text',
+            'placeholder': 'Enter Your full name...'
+        })
+        self.fields['username'].widget.attrs.update({
+            'class': 'form-control',
+            'id': 'username',
+            'type': 'text',
+            'placeholder': 'Enter username...'
+        })
+        self.fields['email'].label = 'E-mail'
+        self.fields['email'].widget.attrs.update({
+            'class': 'form-control',
+            'id': 'email',
+            'type': 'email',
+            'placeholder': 'Enter E-mail...',
         })

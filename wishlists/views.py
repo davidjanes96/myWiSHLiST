@@ -11,14 +11,17 @@ from .forms import WishlistForm, ProductForm
 
 @login_required(login_url="login")
 def get_all_wishlists(request):
-    wishlists = Wishlist.objects.all()
+    account = request.user.account
+
+    wishlists = account.wishlist_set.all()
     context = {'wishlists': wishlists, }
     return render(request, 'wishlists/wishlists.html', context)
 
 
 @login_required(login_url="login")
 def get_wishlist_details(request, pk):
-    wishlists = Wishlist.objects.all()
+    account = request.user.account
+    wishlists = account.wishlist_set.all()
     wishlist = Wishlist.objects.get(id=pk)
     context = {
         'wishlist': wishlist, 
@@ -29,13 +32,17 @@ def get_wishlist_details(request, pk):
 
 @login_required(login_url="login")
 def create_wishlist(request):
+    account = request.user.account
+
     form = WishlistForm()
 
     if request.method == 'POST':
         form = WishlistForm(request.POST)
         if form.is_valid():
+            wishlist = form.save(commit=False)
+            wishlist.owner = account
             form.save()
-            return redirect('wishlists')
+            return redirect('wishlist', pk=wishlist.id)
 
     context = {'form': form}
     return render(request, 'wishlists/wishlist_form.html', context)
@@ -43,14 +50,15 @@ def create_wishlist(request):
 
 @login_required(login_url="login")
 def update_wishlist(request, pk):
-    wishlist = Wishlist.objects.get(id=pk)
+    account = request.user.account
+    wishlist = account.wishlist_set.get(id=pk)
     form = WishlistForm(instance = wishlist)
 
     if request.method == 'POST':
         form = WishlistForm(request.POST, instance=wishlist)
         if form.is_valid():
             form.save()
-            return redirect('wishlists')
+            return redirect('wishlist')
 
     context = {'form': form}
     return render(request, 'wishlists/wishlist_form.html', context)
@@ -58,7 +66,8 @@ def update_wishlist(request, pk):
 
 @login_required(login_url="login") 
 def delete_wishlist(request, pk):
-    wishlist = Wishlist.objects.get(id=pk)
+    account = request.user.account
+    wishlist = account.wishlist_set.get(id=pk)
     if request.method == 'POST':
         wishlist.delete()
         return redirect('wishlists')

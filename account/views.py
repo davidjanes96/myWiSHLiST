@@ -4,19 +4,26 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Account
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, AccountForm
 
 
 
 @login_required(login_url="login")
 def account_view(request):
-    account = Account.objects.get()
-
+    account = request.user.account
+    
+    form = AccountForm(instance=account)
+    if request.method == 'POST':
+        form = AccountForm(request.POST, instance=account)
+        if form.is_valid:
+            form.save()
+            return redirect('account')
+    
     context = {
-        'account': account
+        'account': account,
+        'form': form
     }
     return render (request, 'account/account.html', context)
-
 
 def registerUser(request):
     page = 'register'

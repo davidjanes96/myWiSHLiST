@@ -1,56 +1,60 @@
 {% extends 'main.html' %}
 
-{% load static %}
-
 {% block content %}
 
-
-<!-- WishList Title -->
-<section class="page-section" id="wishlists">
-    <div class="container px-4 px-lg-5">
+<section class="page-section" id="single-wishlist">
+    <div class="container-custom px-4 px-lg-5">
         <h2 class="text-center">My Wishlists</h2>
         <hr class="divider" />
-                    
-                    <div class="row">
-                        <div class="col-4 pb-4"> 
-                            <div class="card shadow-sm">
-                                <div class="card-body">
-                                    
-                                    <div class="text-center">
-                                        <p><a href="{% url 'create-wishlist' %}" class="btn btn-primary radius"><i class="bi bi-bag-plus fs-1"></i></a></p>
-                                    </div>
-                                </div>
-                            </div>
+        <div class="row">
+            <!-- LEFT COLUMN ALL WISHLISTS-->
+            <div class="col-lg-3">
+                <div class="px-2 mb-2">
+                    <a href="{% url 'create-wishlist' %}"><button class="btn btn-dark fs-5"><i class="bi bi-plus"></i> Add New</button></a>
+                </div>      
+                <div class="px-2">
+                    {% for wishlist in wishlists %}
+                    <a href="{% url 'wishlist' wishlist.id %}">
+                        <div class="p-2 mb-2 card-custom">
+                            <h5 class="text-truncate text-black"><i class="bi-list-nested"></i> {{wishlist.title}}</h5>
+                            <p class="text-muted mb-0 fs-7 d-inline">{{wishlist.total_products}} item{{wishlist.total_products|pluralize:"s"}}</p>
+                            <p class="text-muted mb-0 fs-7 d-inline"><i class="bi bi-dot"></i></p>
+                            <p class="text-muted mb-0 fs-7 d-inline">Last modified: {{wishlist.modified|date:"M, d. Y." }}</p>
                         </div>
-                        {% for wishlist in wishlists %}
-                        <!-- One Card Large-->
-                        <div class="col-4 pb-4"> 
-                            <div class="card shadow-sm">
-                                <div class="pt-4 text-center">
-                                    <a href="{% url 'wishlist' wishlist.id %}"><i class="bi-list-columns fs-1"></i></a>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title text-center"><a href="{% url 'wishlist' wishlist.id %}">{{wishlist.title}}</a></h5>
-                                    <p class="card-text text-muted">Products: {{wishlist.total_products}}</p>
-                                    <p class="card-text text-muted">Total price: {{wishlist.grand_total_price}}</p>
-                                    <p class="card-text text-muted">Priority: {{wishlist.get_priority_display}}</p>
-                                    <p class="card-text text-muted">Created: {{wishlist.created|date:"M d, Y"}}</p>
-                                    <p class="card-text text-muted">Last modified: {{wishlist.modified|date:"M d, Y"}}</p>
-                                    <div class="text-center">
-                                        <a href="{% url 'wishlist' wishlist.id %}" class="btn btn-primary">View</a>
-                                        <a href="{% url 'update-wishlist' wishlist.id %}" class="btn btn-primary">Edit</a>
-                                        <a href="{% url 'delete-wishlist' wishlist.id %}" class="btn btn-primary">Delete</a>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %} 
-                    </div>
-                
-        </div>
+                    </a>
+                    {% endfor %}
+                </div>                
+            </div>
 
+            <!-- RIGHT COLUMN INDIVUDUAL WISHLIST ITEMS -->
+
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-9">
+                        <h2>Select a wishlist to edit.</h2>
+                    </div>
+                    <div class="pb-2">
+                        <button class="btn btn-dark d-inline mx-1">Filter</button>
+                        <button class="btn btn-dark d-inline float-end mx-1"><i class="bi bi-trash"></i></button>
+                        <button class="btn btn-dark d-inline float-end mx-1"><i class="bi bi-pen"></i></button>
+                    </div>
+
+                    <div class="p-2 d-flex justify-content-center">
+                        <h5 class="text-muted">Your wishlist items will appear here.</h5>
+                    </div>
+
+                    <div class="d-flex justify-content-center py-3">
+                        <a href="{% url 'create-wishlist' %}"><button class="btn btn-dark fs-5"><i class="bi bi-plus"></i> Add New</button></a>
+                    </div>  
+                </div>
+
+            </div>
+        </div>
+        
+        
+    </div>
 </section>
+
 
 
 {% endblock %}

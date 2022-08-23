@@ -12,9 +12,20 @@ def createAccount(sender, instance, created, **kwargs):
             name = f"{user.first_name} {user.last_name}",
         )
 
+def updateUser(sender, instance, created, **kwargs):
+    account = instance
+    user = account.user
+    if created == False:
+        user.first_name = account.name.split(' ').pop(0)
+        user.last_name = account.name.split(' ').pop(-1)
+        user.username = account.username
+        user.email = account.email
+        user.save()
+
 def deleteAccount(sender, instance, **kwargs):
     user = instance.user
     user.delete()
 
 post_save.connect(createAccount, sender=User)
+post_save.connect(updateUser, sender=Account)
 post_delete.connect(deleteAccount, sender=Account)

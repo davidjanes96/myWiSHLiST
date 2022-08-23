@@ -18,7 +18,7 @@
                             <div class="px-4 px-lg-5 py-3">
                                 <form id="CustomUserCreationForm" action="{% url 'register' %}" method="POST">{% csrf_token %}
                                     <!-- Username input-->
-                                     <div class="form-floating mb-3">
+                                    <div class="form-floating mb-3">
                                         {{form.username}}
                                         <span class="form-icon bi bi-info-circle fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="{{form.username.help_text}}"></span>
                                         <label for="username" class="text-muted">{{form.username.label}}</label>

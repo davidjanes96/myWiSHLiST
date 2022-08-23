@@ -3056,6 +3056,7 @@ textarea.form-control-lg {
   color: #fff;
   background-color: #15b2dd;
   border-color: #15b2dd;
+  border-radius: 26px;
 }
 .btn-primary:hover {
   color: #fff;
@@ -3176,6 +3177,7 @@ textarea.form-control-lg {
   color: #000;
   background-color: #ffc107;
   border-color: #ffc107;
+
 }
 .btn-warning:hover {
   color: #000;
@@ -3206,6 +3208,7 @@ textarea.form-control-lg {
   color: #fff;
   background-color: #dc3545;
   border-color: #dc3545;
+  border-radius: 26px;
 }
 .btn-danger:hover {
   color: #fff;
@@ -3294,27 +3297,27 @@ textarea.form-control-lg {
 }
 
 .btn-outline-primary {
-  color: #f4623a;
-  border-color: #f4623a;
+  color: #15b2dd;
+  border-color: #15b2dd;
 }
 .btn-outline-primary:hover {
   color: #fff;
-  background-color: #f4623a;
-  border-color: #f4623a;
+  background-color: #159ad8;
+  border-color: #0b95bb;
 }
 .btn-check:focus + .btn-outline-primary, .btn-outline-primary:focus {
-  box-shadow: 0 0 0 0.25rem rgba(244, 98, 58, 0.5);
+  box-shadow: 0 0 0 0.25rem rgba(0, 100, 158, 0.5);
 }
 .btn-check:checked + .btn-outline-primary, .btn-check:active + .btn-outline-primary, .btn-outline-primary:active, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show {
   color: #fff;
-  background-color: #f4623a;
-  border-color: #f4623a;
+  background-color: #159ad8;
+  border-color: #0b95bb;
 }
 .btn-check:checked + .btn-outline-primary:focus, .btn-check:active + .btn-outline-primary:focus, .btn-outline-primary:active:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus {
-  box-shadow: 0 0 0 0.25rem rgba(244, 98, 58, 0.5);
+  box-shadow: 0 0 0 0.25rem rgba(0, 100, 158, 0.5);
 }
 .btn-outline-primary:disabled, .btn-outline-primary.disabled {
-  color: #f4623a;
+  color: #15b2dd;
   background-color: transparent;
 }
 
@@ -7666,6 +7669,10 @@ textarea.form-control-lg {
   font-size: 14px !important;
 }
 
+.fs-8 {
+  font-size: 12px !important;
+}
+
 .fst-italic {
   font-style: italic !important;
 }
@@ -11593,7 +11600,7 @@ header.masthead-login h1, header.masthead-login .h1 {
 }
 
 .card-account {
-  width: 350px;
+  width: 500px;
   border-radius: 50px;
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);

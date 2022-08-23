@@ -76,3 +76,16 @@ setTimeout(function () {
         $(this).alert('close');
     });
 });
+
+
+
+//Edit & preview account switch
+function editDIV() {
+    document.getElementById("displayDIV").style.display="none";
+    document.getElementById("editDIV").style.display="block";
+}
+
+function displayDIV() {
+    document.getElementById("displayDIV").style.display="block";
+    document.getElementById("editDIV").style.display="none";
+}
