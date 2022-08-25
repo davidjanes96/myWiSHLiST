@@ -18,6 +18,9 @@ class Wishlist(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['-modified']
+
     def __str__(self):
         return self.title
 
@@ -29,7 +32,6 @@ class Wishlist(models.Model):
         except AttributeError:
             return 0
 
-
     @property
     def grand_total_price(self):
         try:
@@ -39,7 +41,7 @@ class Wishlist(models.Model):
                 total += product.total_price
             return total
         except AttributeError:
-            return 0
+            return 0    
     
 
 class Product(models.Model):
@@ -60,6 +62,10 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self):
+        super(Product, self).save()
+        self.wishlist.save()
 
     @property
     def total_price(self):

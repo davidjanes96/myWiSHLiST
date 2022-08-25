@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+{% load static %}
 
 {% block content %}
 
@@ -11,8 +12,21 @@
             <div class="col-lg-3">
                 <div class="px-2 mb-2">
                     <a href="{% url 'create-wishlist' %}"><button class="btn btn-dark fs-5"><i class="bi bi-plus"></i> Add New</button></a>
-                </div>      
+                </div>
+                <!-- SEARCH BAR -->
+                <form action="{% url 'wishlist' wishlist.id %}" method="GET">
+                    <div class="row d-flex align-items-center px-2 mb-2">
+                        <div class="col-md-12">
+                            <div class="search">
+                                <button type="submit" class="btn bi bi-search"></button>
+                                <input type="text" class="form-control fs-7" name="search_query" value="{{search_query}}" placeholder="Search wishlist by name...">
+                            </div> 
+                        </div> 
+                    </div> 
+                </form>
+                <!-- END SEARCH BAR -->  
                 <div class="px-2">
+                    {% if wishlists %}
                     {% for wishlist in wishlists %}
                     <a href="{% url 'wishlist' wishlist.id %}">
                         {% url 'wishlist' wishlist.id as url_wishlist %}
@@ -24,6 +38,9 @@
                         </div>
                     </a>
                     {% endfor %}
+                    {% else %}
+                    <h6 class="text-muted pt-2">{{text_message}}</h6>
+                    {% endif %}
                 </div>                
             </div>
 
@@ -53,16 +70,32 @@
                     <div class="row">
                         <div class="col-1">
                             <p><i class="bi bi-list"></i></p>
+                            {% if not product.url %}
+                            <div class="product">
+                                <img src="{% static 'images/product.png' %}" class="rounded-circle img-fluid d-none d-lg-block">
+                            </div>
+                            {% else %}
+                            <div class="product-url">
+                                <img src="{% static 'images/product.png' %}" class="rounded-circle img-fluid d-none d-lg-block">
+                            </div>
+                            {% endif %}
                         </div>
-                        <div class="col-11">
-                            <div>
+                        <div class="col-11 ps-5">
+                            <div class="pb-1">
                                 <h6 class="d-inline">{{product.name}}</h6>
-                                <h4 class="d-inline float-end">{{product.currency.tag}} {{product.total_price}}</h4> 
+                                <h4 class="d-inline float-end m-0">{{product.currency.tag}} {{product.total_price}}</h4>
                             </div>
-                            <div class="">
+                            <div class="pt-1 pb-4 m-0">
+                                <p class="float-end text-muted fs-7">{{product.currency.tag}} {{product.price}} per piece</p>
+                            </div>
+
+                            <div class="pb-2 mb-0">
+                                {% if not product.url %}
+                                {% else %}
                                 <a href="{{product.url}}" target="_blank"  class="fs-7 overflow-hidden">{{product.url}}</a>
+                                {% endif %}
                             </div>
-                            <div>
+                            <div class="mt-0">
                                 <p class="d-inline float-start mb-0 mt-2 text-muted fs-7">{{product.get_priority_display}} priority</p>
                                 <a href="{% url 'delete-product' wishlist.id product.id %}" class="d-inline float-end mx-2" style="color: black; font-size: x-large;"><i class="bi bi-trash"></i></a>
                                 <a href="{% url 'update-product' wishlist.id product.id %}" class="d-inline float-end mx-2" style="color: black; font-size: x-large;"><i class="bi bi-pen"></i></a> 
@@ -76,17 +109,26 @@
 
                 {% else %}
                 <div class="p-2">
-                    <h5>There are no items on this wishlist yet.</h5>
+                    <h5 class="text-muted">There are no items on this wishlist yet.</h5>
                 </div>
                 
                 {% endif %}
                 <div class="d-flex justify-content-center py-3">
                     <a href="{% url 'create-product' wishlist.id %}"><button class="btn btn-dark fs-6"><i class="bi bi-plus"></i> Add New</button></a>
                 </div>
-
-                <div class="d-flex justify-content-end">
-                    <h2>Total: {{wishlist.grand_total_price}}</h2>
-                </div>
+                <!-- TOTAL AMOUNT -->
+                    {% if error_message %}
+                    <div class="d-flex flex-row-reverse">
+                        <h3 class="m-1 d-inline"> 0.00</h4><h2 class="fw-bold d-inline">Total: </h2>
+                    </div>
+                    <div class="d-flex flex-row-reverse">
+                        <p class="text-danger">{{error_message}}</p>
+                    </div>                    
+                    {% else %}
+                    <div class="d-flex justify-content-end">
+                        <h2 class="fw-bold">Total: </h2><h3 class="m-1"> {{currency_1}} {{wishlist.grand_total_price}}</h4>
+                        {% endif %}
+                    </div>
 
             </div>
         </div>

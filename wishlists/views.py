@@ -1,4 +1,5 @@
 
+from locale import currency
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
@@ -13,18 +14,58 @@ from .forms import WishlistForm, ProductForm
 def get_all_wishlists(request):
     account = request.user.account
     wishlists = account.wishlist_set.all()
-    context = {'wishlists': wishlists, }
-    return render(request, 'wishlists/wishlists.html', context)
+    text_message = ''
+    search_query = ''
 
+    if not wishlists:
+        text_message = "You don't have any wishlists."
+
+    if request.GET.get('search_query'):
+        search_query = request.GET.get('search_query')
+        wishlists = account.wishlist_set.filter(title__icontains=search_query)
+        if not wishlists:
+            text_message = "No wishlists found."        
+
+    context = {
+        'wishlists': wishlists,
+        'search_query': search_query,
+        'text_message': text_message,
+        }    
+    return render(request, 'wishlists/wishlists.html', context)
+    
 
 @login_required(login_url="login")
 def get_wishlist_details(request, pk):
     account = request.user.account
     wishlists = account.wishlist_set.all()
+    error_message = ''
+    text_message = ''
+    search_query = ''
+
+    if not wishlists:
+        text_message = "You don't have any wishlists."
+
+    if request.GET.get('search_query'):
+        search_query = request.GET.get('search_query')
+        wishlists = account.wishlist_set.filter(title__icontains=search_query)
+        if not wishlists:
+            text_message = "No wishlists found."
+
     wishlist = Wishlist.objects.get(id=pk)
+
+    currency_1 = wishlist.product_set.all().values_list('currency__tag', flat=True).order_by('currency__name')[0]
+    currency_2 = wishlist.product_set.all().values_list('currency__tag', flat=True).order_by('-currency__name')[0]
+
+    if currency_1 != currency_2:
+        error_message = "Please match item currencies to display total value."
+
     context = {
         'wishlist': wishlist, 
         'wishlists': wishlists,
+        'search_query': search_query,
+        'text_message': text_message,
+        'error_message': error_message,
+        'currency_1': currency_1,
         }
     return render (request, 'wishlists/wishlist.html', context)
 
@@ -131,5 +172,5 @@ def delete_product(request, pk, productPK):
         messages.success(request, 'Item deleted successfully.')
         return redirect('wishlist', pk=wishlist.id)
 
-    context = {'object': wishlist}
+    context = {'object': product}
     return render(request, 'wishlists/delete_template.html', context)
