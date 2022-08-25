@@ -6,6 +6,13 @@ from wishlists.models import Wishlist, Product, Currency
 
 
 def home_view(request):
-    wishlists = Wishlist.objects.all()
-    context = {'wishlists': wishlists, }
+    if request.user.is_authenticated:
+        account = request.user.account
+        wishlists = account.wishlist_set.all()
+        context = {
+            'wishlists': wishlists,
+            'account': account
+            }
+    else:
+        context = {}
     return render(request, 'index.html', context)

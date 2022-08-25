@@ -12,7 +12,6 @@ from .forms import WishlistForm, ProductForm
 @login_required(login_url="login")
 def get_all_wishlists(request):
     account = request.user.account
-
     wishlists = account.wishlist_set.all()
     context = {'wishlists': wishlists, }
     return render(request, 'wishlists/wishlists.html', context)
@@ -42,6 +41,7 @@ def create_wishlist(request):
             wishlist = form.save(commit=False)
             wishlist.owner = account
             form.save()
+            messages.success(request, 'Wishlist created successfully.')
             return redirect('wishlist', pk=wishlist.id)
 
     context = {'form': form}
@@ -58,7 +58,8 @@ def update_wishlist(request, pk):
         form = WishlistForm(request.POST, instance=wishlist)
         if form.is_valid():
             form.save()
-            return redirect('wishlist')
+            messages.success(request, 'Wishlist updated successfully.')
+            return redirect('wishlist', pk=wishlist.id)
 
     context = {'form': form}
     return render(request, 'wishlists/wishlist_form.html', context)
@@ -70,6 +71,7 @@ def delete_wishlist(request, pk):
     wishlist = account.wishlist_set.get(id=pk)
     if request.method == 'POST':
         wishlist.delete()
+        messages.success(request, 'Wishlist deleted successfully.')
         return redirect('wishlists')
 
     context = {'object': wishlist}
@@ -126,6 +128,7 @@ def delete_product(request, pk, productPK):
     product = wishlist.product_set.get(id=productPK)
     if request.method == 'POST':
         product.delete()
+        messages.success(request, 'Item deleted successfully.')
         return redirect('wishlist', pk=wishlist.id)
 
     context = {'object': wishlist}

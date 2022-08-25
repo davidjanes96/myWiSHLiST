@@ -4698,6 +4698,11 @@ textarea.form-control-lg {
   transition: 0.2s ease;
 }
 
+.card-custom.active {
+  box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.30) !important;
+  border-radius: 6px;
+}
+
 .accordion-button {
   position: relative;
   display: flex;

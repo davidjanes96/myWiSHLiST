@@ -9,10 +9,11 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto my-2 my-lg-0">
                 {% url 'wishlists' as url_wishlists %}
+                {% url 'wishlist' wishlist.id as url_wishlist %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
 
                 {% if request.user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link {% if request.path == url_wishlists %} active {% endif %}" href="{% url 'wishlists' %}">My wishlists</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.path == url_wishlists or request.path == url_wishlist %} active {% endif %}" href="{% url 'wishlists' %}">My wishlists</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'account' %}">Account</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
                 {% else %}

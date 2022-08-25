@@ -13,10 +13,17 @@
                 <hr class="divider" />
             </div>
             <div class="col-lg-8 align-self-baseline">
-                <p class="text-white-75 mb-5">MyWiSHLiST can help you create wishlists and better organize your buying schedule! Just create an account, log in and start wishing! Oh, and it's FREE!</p>
                 {% if request.user.is_authenticated %}
+                <p class="text-white-75 mb-3">Hi {{account.name}},</p>
+                <p class="text-white-75 mb-5">MyWiSHLiST can help you create wishlists and better organize your buying schedule! 
+                    {% if not wishlists %}
+                    Start wishing and some of Your wishlists will be displayed below!</p>
+                    {% else %}
+                    Some of the wishlists You already created are displayed below so You can pick up where You left off or create a new wishlist!</p>
+                    {% endif %}
                 <a class="btn btn-primary btn-xl" href="{% url 'create-wishlist' %}">Create wishlist</a>
                 {% else %}
+                <p class="text-white-75 mb-5">MyWiSHLiST can help you create wishlists and better organize your buying schedule! Just create an account, log in and start wishing! Oh, and it's FREE!</p>
                 <a class="btn btn-primary btn-xl" href="{% url 'login' %}">Login</a>
                 {% endif %}
             </div>
@@ -25,7 +32,7 @@
 </header>
 
 
-{% if user.is_authenticated %}
+{% if request.user.is_authenticated %}
 {% if wishlists %}
 <!-- WishList Title -->
 <section class="page-section-custom" id="wishlists">
