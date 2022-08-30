@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
+from .utils import paginateWishlists
 from .models import Wishlist
 from .forms import WishlistForm, ProductForm
 
@@ -26,10 +27,13 @@ def get_all_wishlists(request):
         if not wishlists:
             text_message = "No wishlists found."        
 
+    custom_range, wishlists = paginateWishlists(request, wishlists, 10)
+
     context = {
         'wishlists': wishlists,
         'search_query': search_query,
         'text_message': text_message,
+        'custom_range': custom_range,
         }    
     return render(request, 'wishlists/wishlists.html', context)
     
@@ -53,11 +57,13 @@ def get_wishlist_details(request, pk):
 
     wishlist = Wishlist.objects.get(id=pk)
 
-    currency_1 = wishlist.product_set.all().values_list('currency__tag', flat=True).order_by('currency__name')[0]
-    currency_2 = wishlist.product_set.all().values_list('currency__tag', flat=True).order_by('-currency__name')[0]
+    currency_1 = wishlist.product_set.all().values_list('currency__tag', flat=True).order_by('currency__name').first()
+    currency_2 = wishlist.product_set.all().values_list('currency__tag', flat=True).order_by('-currency__name').first()
 
     if currency_1 != currency_2:
         error_message = "Please match item currencies to display total value."
+
+    custom_range, wishlists = paginateWishlists(request, wishlists, 10)
 
     context = {
         'wishlist': wishlist, 
@@ -66,6 +72,7 @@ def get_wishlist_details(request, pk):
         'text_message': text_message,
         'error_message': error_message,
         'currency_1': currency_1,
+        'custom_range': custom_range,
         }
     return render (request, 'wishlists/wishlist.html', context)
 

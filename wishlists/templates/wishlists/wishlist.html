@@ -14,7 +14,7 @@
                     <a href="{% url 'create-wishlist' %}"><button class="btn btn-dark fs-5"><i class="bi bi-plus"></i> Add New</button></a>
                 </div>
                 <!-- SEARCH BAR -->
-                <form action="{% url 'wishlist' wishlist.id %}" method="GET">
+                <form id="searchForm" action="{% url 'wishlist' wishlist.id %}" method="GET">
                     <div class="row d-flex align-items-center px-2 mb-2">
                         <div class="col-md-12">
                             <div class="search">
@@ -41,7 +41,9 @@
                     {% else %}
                     <h6 class="text-muted pt-2">{{text_message}}</h6>
                     {% endif %}
-                </div>                
+                </div>
+                <!-- Pagination -->
+                {% include 'pagination.html' with queryset=wishlists custom_range=custom_range %}                 
             </div>
 
             <!-- RIGHT COLUMN INDIVUDUAL WISHLIST ITEMS -->
@@ -57,7 +59,7 @@
                 </div>
 
                 <div class="pb-2">
-                    <button class="btn btn-dark d-inline mx-1">Filter</button>
+                    <button class="btn btn-dark d-inline mx-1">Sort</button>
                     <a href="{% url 'delete-wishlist' wishlist.id %}" class="btn btn-dark d-inline float-end mx-1"><i class="bi bi-trash"></i></a>
                     <a href="{% url 'update-wishlist' wishlist.id %}" class="btn btn-dark d-inline float-end mx-1"><i class="bi bi-pen"></i></a>
                 </div>
@@ -119,14 +121,18 @@
                 <!-- TOTAL AMOUNT -->
                     {% if error_message %}
                     <div class="d-flex flex-row-reverse">
-                        <h3 class="m-1 d-inline"> 0.00</h4><h2 class="fw-bold d-inline">Total: </h2>
+                        <h3 class="m-1 d-inline"> 0</h4><h2 class="fw-bold d-inline">Total: </h2>
                     </div>
                     <div class="d-flex flex-row-reverse">
                         <p class="text-danger">{{error_message}}</p>
                     </div>                    
                     {% else %}
                     <div class="d-flex justify-content-end">
-                        <h2 class="fw-bold">Total: </h2><h3 class="m-1"> {{currency_1}} {{wishlist.grand_total_price}}</h4>
+                        <h2 class="fw-bold">Total: </h2><h3 class="m-1">
+                            {% if currency_1 == None %} 
+                            {% else %} 
+                            {{currency_1}} 
+                            {% endif %} {{wishlist.grand_total_price}}</h4>
                         {% endif %}
                     </div>
 
