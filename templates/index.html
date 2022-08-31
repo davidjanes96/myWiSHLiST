@@ -67,7 +67,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title text-center"><a href="{% url 'wishlist' wishlist.id %}">{{wishlist.title}}</a></h5>
                                     <p class="card-text text-muted">Products: {{wishlist.total_products}}</p>
-                                    <p class="card-text text-muted">Total price: {{wishlist.grand_total_price}}</p>
+                                    <p class="card-text text-muted">Total amount: {{wishlist.grand_total_price}}</p>
                                     <p class="card-text text-muted">Priority: {{wishlist.get_priority_display}}</p>
                                     <p class="card-text text-muted">Created: {{wishlist.created|date:"M d, Y"}}</p>
                                     <p class="card-text text-muted">Last modified: {{wishlist.modified|date:"M d, Y"}}</p>

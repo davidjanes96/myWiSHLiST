@@ -11,7 +11,7 @@ def home_view(request):
         wishlists = account.wishlist_set.all()
         context = {
             'wishlists': wishlists,
-            'account': account
+            'account': account,
             }
     else:
         context = {}

@@ -56,7 +56,27 @@ def get_wishlist_details(request, pk):
             text_message = "No wishlists found."
 
     wishlist = Wishlist.objects.get(id=pk)
+    products = wishlist.product_set.all().order_by('name')
 
+    #sort conditions
+    if request.GET.get('sort') == 'name-asc':
+        products = wishlist.product_set.all().order_by('name')
+    elif request.GET.get('sort') == 'name-desc':
+        products = wishlist.product_set.all().order_by('-name')
+    elif request.GET.get('sort') == 'price-asc':
+        products = wishlist.product_set.all().order_by('price')
+    elif request.GET.get('sort') == 'price-desc':
+        products = wishlist.product_set.all().order_by('-price')
+    elif request.GET.get('sort') == 'quantity-asc':
+        products = wishlist.product_set.all().order_by('quantity')
+    elif request.GET.get('sort') == 'quantity-desc':
+        products = wishlist.product_set.all().order_by('-quantity')
+    elif request.GET.get('sort') == 'priority-asc':
+        products = wishlist.product_set.all().order_by('priority')
+    elif request.GET.get('sort') == 'priority-desc':
+        products = wishlist.product_set.all().order_by('-priority')
+
+    #currency error handling
     currency_1 = wishlist.product_set.all().values_list('currency__tag', flat=True).order_by('currency__name').first()
     currency_2 = wishlist.product_set.all().values_list('currency__tag', flat=True).order_by('-currency__name').first()
 
@@ -73,6 +93,7 @@ def get_wishlist_details(request, pk):
         'error_message': error_message,
         'currency_1': currency_1,
         'custom_range': custom_range,
+        'products': products,
         }
     return render (request, 'wishlists/wishlist.html', context)
 

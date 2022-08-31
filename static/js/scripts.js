@@ -84,10 +84,11 @@ function editDIV() {
     document.getElementById("displayDIV").style.display="none";
     document.getElementById("editDIV").style.display="block";
 }
+//if errors exist keep edit div display
+let error = document.getElementById("error");
 
-function displayDIV() {
-    document.getElementById("displayDIV").style.display="block";
-    document.getElementById("editDIV").style.display="none";
+if (error){
+    editDIV();
 }
 
 
@@ -110,3 +111,5 @@ if(searchForm){
         })
     }
 }
+
+//sort dropdown submit

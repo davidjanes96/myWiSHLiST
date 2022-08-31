@@ -11,13 +11,18 @@ from .forms import CustomUserCreationForm, AccountForm
 @login_required(login_url="login")
 def account_view(request):
     account = request.user.account
-    
     form = AccountForm(instance=account)
+    
     if request.method == 'POST':
         form = AccountForm(request.POST, instance=account)
-        if form.is_valid:
-            form.save()
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            messages.success(request, 'Account updated successfully!')
             return redirect('account')
+        else:
+            messages.error(request, 'An error has occured.')
     
     context = {
         'account': account,

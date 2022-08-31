@@ -49,7 +49,7 @@
                     <div id="editDIV" class="px-4 px-lg-5 py-2" style="display: none;">
                         <form id="AccountForm" method="POST" action="{% url 'account' %}">{% csrf_token %}
                             <button class="btn btn-dark fs-8 mt-3" type="submit">Confirm</button>
-                            <button class="btn btn-danger fs-8 mt-3" type="button" onclick="displayDIV()">Cancel</button>
+                            <a href="{% url 'account' %}"><button class="btn btn-danger fs-8 mt-3" type="button">Cancel</button></a>
                             <p class="text-muted mt-3">Edit Your account information</p>
                             <hr class="divider mt-3" />
                             <!-- Name input-->
@@ -64,7 +64,7 @@
                                 </div>
                                     <!-- Username errors -->
                                     {% for error in form.username.errors %}
-                                    <li class="fs-7 mb-3 px-2 text-start" style="color: red;">{{error}}</li> 
+                                    <li id="error" class="fs-7 mb-3 px-2 text-start" style="color: red;">{{error}}</li> 
                                     {% endfor %}
                                 <!-- E-mail input-->
                                 <div class="form-floating">
@@ -73,7 +73,7 @@
                                 </div>
                                     <!-- Email errors -->
                                     {% for error in form.email.errors %}
-                                    <li class="fs-7 mt-3 mb-2 px-2 text-start" style="color: red;">{{error}}</li> 
+                                    <li id="error" class="fs-7 mt-3 mb-2 px-2 text-start" style="color: red;">{{error}}</li> 
                                     {% endfor %}
                         </form>
                     </div>

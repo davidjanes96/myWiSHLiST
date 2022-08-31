@@ -58,16 +58,34 @@
                     </div>
                 </div>
 
-                <div class="pb-2">
-                    <button class="btn btn-dark d-inline mx-1">Sort</button>
+                <div class="pb-5">
+                    <!-- SORT MENU -->
+                    <form action="{% url 'wishlist' wishlist.id %}" method="GET">
+                    <div class="dropdown d-inline float-start mx-1">
+                        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          Sort by
+                        </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><button class="dropdown-item" name="sort" value="name-asc">Name (A-Z)</button></li>
+                                <li><button class="dropdown-item" name="sort" value="name-desc">Name (Z-A)</button></li>
+                                <li><button class="dropdown-item" name="sort" value="price-asc">Price (Low to High)</button></li>
+                                <li><button class="dropdown-item" name="sort" value="price-desc">Price (High to Low)</button></li>
+                                <li><button class="dropdown-item" name="sort" value="quantity-asc">Quantity (Low to High)</button></li>
+                                <li><button class="dropdown-item" name="sort" value="quantity-desc">Quantity (High to Low)</button></li>
+                                <li><button class="dropdown-item" name="sort" value="priority-asc">Priority (Low to High)</button></li>
+                                <li><button class="dropdown-item" name="sort" value="priority-desc">Priority (High to Low)</button></li>
+                            </ul>
+                    </div>
+                    </form>
+                    <!--END SORT MENU -->
                     <a href="{% url 'delete-wishlist' wishlist.id %}" class="btn btn-dark d-inline float-end mx-1"><i class="bi bi-trash"></i></a>
-                    <a href="{% url 'update-wishlist' wishlist.id %}" class="btn btn-dark d-inline float-end mx-1"><i class="bi bi-pen"></i></a>
+                    <a href="{% url 'update-wishlist' wishlist.id %}" class="btn btn-dark d-inline float-end mx-1"><i class="bi bi-pen"></i></a> 
                 </div>
                 
                 
                 <!-- Products -->
                 {% if wishlist.product_set.all %}
-                {% for product in wishlist.product_set.all %}
+                {% for product in products %}
                 <div class="bg-light p-2 mb-2">
                     <div class="row">
                         <div class="col-1">
