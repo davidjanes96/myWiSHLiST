@@ -14,7 +14,7 @@
             </div>
             <div class="col-lg-8 align-self-baseline">
                 {% if request.user.is_authenticated %}
-                <p class="text-white-75 mb-3">Hi {{account.name}},</p>
+                <p class="text-white-75 mb-3">Hi {{account.username}},</p>
                 <p class="text-white-75 mb-5">MyWiSHLiST can help you create wishlists and better organize your buying schedule! 
                     {% if not wishlists %}
                     Start wishing and some of Your wishlists will be displayed below!</p>

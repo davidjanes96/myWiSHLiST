@@ -16,8 +16,12 @@ def updateUser(sender, instance, created, **kwargs):
     account = instance
     user = account.user
     if created == False:
-        user.first_name = account.name.split(' ').pop(0)
-        user.last_name = account.name.split(' ').pop(-1)
+        try:
+            user.first_name = account.name.split(' ').pop(0)
+            user.last_name = account.name.split(' ').pop(-1)
+        except:
+            user.first_name = ''
+            user.last_name = ''
         user.username = account.username
         user.email = account.email
         user.save()
