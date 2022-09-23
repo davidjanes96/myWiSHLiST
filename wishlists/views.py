@@ -100,6 +100,7 @@ def get_wishlist_details(request, pk):
 
 @login_required(login_url="login")
 def create_wishlist(request):
+    page = 'create-wishlist'
     account = request.user.account
 
     form = WishlistForm()
@@ -113,12 +114,13 @@ def create_wishlist(request):
             messages.success(request, 'Wishlist created successfully.')
             return redirect('wishlist', pk=wishlist.id)
 
-    context = {'form': form}
+    context = {'form': form, 'page': page}
     return render(request, 'wishlists/wishlist_form.html', context)
 
 
 @login_required(login_url="login")
 def update_wishlist(request, pk):
+    page = 'update-wishlist'
     account = request.user.account
     wishlist = account.wishlist_set.get(id=pk)
     form = WishlistForm(instance = wishlist)
@@ -130,7 +132,7 @@ def update_wishlist(request, pk):
             messages.success(request, 'Wishlist updated successfully.')
             return redirect('wishlist', pk=wishlist.id)
 
-    context = {'form': form}
+    context = {'form': form, 'page': page}
     return render(request, 'wishlists/wishlist_form.html', context)
 
 
