@@ -14,6 +14,10 @@ window.addEventListener('DOMContentLoaded', event => {
     var pageURL3 = "http://127.0.0.1:8000/account/";
     var pageURL4 = "http://127.0.0.1:8000/register/";
     var pageURL5 = "http://127.0.0.1:8000/login/";
+    var pageURL6 = "http://127.0.0.1:8000/reset_password/";
+    var pageURL7 = "http://127.0.0.1:8000/reset_password_sent/";
+    var pageURL8 = "http://127.0.0.1:8000/reset/MQ/set-password/";
+    var pageURL9 = "http://127.0.0.1:8000/reset_password_complete/";
     var navbarShrink = function () {
         const navbarCollapsible = document.body.querySelector('#mainNav');
         if (!navbarCollapsible) {
@@ -24,7 +28,11 @@ window.addEventListener('DOMContentLoaded', event => {
                 window.location.href == pageURL2 || 
                 window.location.href == pageURL3 ||
                 window.location.href == pageURL4 ||
-                window.location.href == pageURL5
+                window.location.href == pageURL5 ||
+                window.location.href == pageURL6 ||
+                window.location.href == pageURL7 ||
+                window.location.href == pageURL8 ||
+                window.location.href == pageURL9
             )) {
             navbarCollapsible.classList.remove('navbar-shrink')
             

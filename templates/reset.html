@@ -1,0 +1,72 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<!-- LOGIN -->
+<header class="masthead-login">
+    <div class="container px-4 px-lg-5 h-100">
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+            <div class="card-register p-4 py-4">
+                <div class="text-center py-4"> 
+                    <a class="text-dark" style="font-family: 'Permanent Marker', cursive; font-size: xx-large; letter-spacing: 1px;" href="{% url 'home' %}">MyWiSHLiST</a>
+                    <h4 class="pt-4">Enter new password</h4> 
+                    <hr class="divider" />
+                    <p class="text-muted px-4 px-lg-5">Please enter your new password twice so we can verify you typed it in correctly.</p>
+                    <div class="px-4 px-lg-5 py-3">
+                        <form method="POST">{% csrf_token %}
+                            <!-- Password input-->
+                            <div class="form-floating mb-3">
+                                {{form.new_password1}}
+                                <span class="form-icon bi bi-info-circle fs-5" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="{{form.new_password1.help_text}}"></span>
+                                <label for="new_password1" class="text-muted">{{form.new_password1.label}}</label>
+                            </div>
+                                <!-- Password errors -->
+                                {% for error in form.new_password1.errors %}
+                                <li class="fs-7 mb-3 px-2 text-start" style="color: red;">{{error}}</li> 
+                                {% endfor %}
+                            <!-- Confirm password input-->
+                            <div class="form-floating mb-3">
+                                {{form.new_password2}}
+                                <span class="form-icon bi bi-info-circle fs-5" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="{{form.new_password2.help_text}}"></span>
+                                <label for="password2" class="text-muted">{{form.new_password2.label}}</label>
+                            </div>
+                                <!-- Confirm password errors -->
+                                {% for error in form.new_password2.errors %}
+                                <li class="fs-7 mb-3 px-2 text-start" style="color: red;">{{error}}</li> 
+                                {% endfor %}
+                            <!-- Submit Button-->
+                            <div class="d-grid pb-3"><button class="btn btn-primary btn-xl" id="submitButton" type="submit">Submit</button></div>
+                            <div class="d-grid"><a href="{% url 'home' %}" class="btn btn-danger btn-xl" id="cancelButton">Cancel</a></div>
+                        </form>
+                    </div>
+
+                    <div class="social-buttons mt-4">
+                        <button class="neo-button">
+            
+                        </button>
+                        <button class="neo-button">
+
+                        </button>
+                        <button class="neo-button">
+
+                        </button>
+                        <button class="neo-button">
+
+                        </button>
+                        <button class="neo-button">
+
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>  
+
+
+
+        </div>
+    </div>
+</header>
+
+{% endblock content %}
