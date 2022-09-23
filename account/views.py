@@ -4,7 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Account
-from .forms import CustomUserCreationForm, AccountForm
+from .forms import CustomUserCreationForm, AccountForm, CustomPasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
 
 
 
@@ -87,5 +88,12 @@ def logoutUser(request):
     logout(request)
     messages.info(request, 'Successfully logged out.')
     return redirect('home')
+
+
+class CustomPasswordChangeView(PasswordChangeView):
+    form_class = CustomPasswordChangeForm
+
+
+
 
 
