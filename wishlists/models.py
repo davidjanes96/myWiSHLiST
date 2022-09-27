@@ -12,7 +12,7 @@ class Wishlist(models.Model):
         high = 5, _('High')
 
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-    owner = models.ForeignKey(Account, null=True, blank=True, on_delete=models.SET_NULL)
+    owner = models.ForeignKey(Account, null=True, blank=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     priority = models.IntegerField(choices=PriorityChoices.choices, default=PriorityChoices.low)
     created = models.DateTimeField(auto_now_add=True)
