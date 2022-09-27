@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mywishlistproject.herokuapp.com']
 
 
 # Application definition
@@ -127,10 +127,21 @@ WSGI_APPLICATION = 'mywishlist.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mywishlist',
+        'USER': 'djanes',
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': 'database-1.c1fsh7yeqokr.eu-central-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -193,3 +204,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 USE_THOUSAND_SEPARATOR = True
+
+if os.getcwd() == '/app':
+    DEBUG = False
