@@ -9,17 +9,17 @@
 
 window.addEventListener('DOMContentLoaded', event => {
     // Navbar shrink function
-    var pageURL = "https://mywishlistproject.herokuapp.com//home/";
-    var pageURL2 = "https://mywishlistproject.herokuapp.com//";
-    var pageURL3 = "https://mywishlistproject.herokuapp.com//account/";
-    var pageURL4 = "https://mywishlistproject.herokuapp.com//register/";
-    var pageURL5 = "https://mywishlistproject.herokuapp.com//login/";
-    var pageURL6 = "https://mywishlistproject.herokuapp.com//reset_password/";
-    var pageURL7 = "https://mywishlistproject.herokuapp.com//reset_password_sent/";
-    var pageURL8 = "https://mywishlistproject.herokuapp.com//reset/MQ/set-password/";
-    var pageURL9 = "https://mywishlistproject.herokuapp.com//reset_password_complete/";
-    var pageURL10 = "https://mywishlistproject.herokuapp.com//change_password/";
-    var pageURL11 = "https://mywishlistproject.herokuapp.com//change_password_done/";
+    var pageURL = "https://mywishlistproject.herokuapp.com/home/";
+    var pageURL2 = "https://mywishlistproject.herokuapp.com/";
+    var pageURL3 = "https://mywishlistproject.herokuapp.com/account/";
+    var pageURL4 = "https://mywishlistproject.herokuapp.com/register/";
+    var pageURL5 = "https://mywishlistproject.herokuapp.com/login/";
+    var pageURL6 = "https://mywishlistproject.herokuapp.com/reset_password/";
+    var pageURL7 = "https://mywishlistproject.herokuapp.com/reset_password_sent/";
+    var pageURL8 = "https://mywishlistproject.herokuapp.com/reset/MQ/set-password/";
+    var pageURL9 = "https://mywishlistproject.herokuapp.com/reset_password_complete/";
+    var pageURL10 = "https://mywishlistproject.herokuapp.com/change_password/";
+    var pageURL11 = "https://mywishlistproject.herokuapp.com/change_password_done/";
     var navbarShrink = function () {
         const navbarCollapsible = document.body.querySelector('#mainNav');
         if (!navbarCollapsible) {
