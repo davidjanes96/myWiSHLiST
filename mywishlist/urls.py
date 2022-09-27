@@ -13,6 +13,7 @@ urlpatterns = [
     path('home/', views.home_view, name="home"),
     path('', include('wishlists.urls')),
     path('', include('account.urls')),
+    path('api/', include('api.urls')),
 
     path('reset_password/', views.CustomPasswordResetView.as_view(template_name="reset_password.html"), name="reset_password"),
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="reset_password_sent.html"), name="password_reset_done"),

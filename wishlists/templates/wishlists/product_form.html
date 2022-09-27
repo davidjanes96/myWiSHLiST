@@ -6,9 +6,9 @@
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-lg-8 col-xl-6 text-center">
-                <h2 class="mt-0">Add item</h2>
+                <h2 class="mt-0">{% if page == 'create_product' %}Add{% elif page == 'update_product' %}Edit{% endif %} item</h2>
                 <hr class="divider" />
-                <p class="text-muted mb-5">Fill out the fields to add the item to your wishlist!</p>
+                <p class="text-muted mb-5">Fill out the fields to {% if page == 'create_product' %}add the item to{% elif page == 'update_product' %}edit the item on{% endif %} your wishlist!</p>
             </div>
         </div>
         <div class="row gx-4 gx-lg-5 justify-content-center mb-5">

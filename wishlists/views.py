@@ -151,6 +151,7 @@ def delete_wishlist(request, pk):
 
 @login_required(login_url="login") 
 def create_product(request, pk):
+    page = 'create_product'
     wishlist = Wishlist.objects.get(id=pk)
     form = ProductForm()
 
@@ -166,12 +167,14 @@ def create_product(request, pk):
     context = {
         'form': form,
         'wishlist': wishlist,
+        'page': page
         }
     return render(request, 'wishlists/product_form.html', context)
 
 
 @login_required(login_url="login") 
 def update_product(request, pk, productPK):
+    page = 'update_product'
     wishlist = Wishlist.objects.get(id=pk)
     product = wishlist.product_set.get(id=productPK)
     form = ProductForm(instance=product)
@@ -189,6 +192,7 @@ def update_product(request, pk, productPK):
         'form': form,
         'wishlist': wishlist,
         'product': product,
+        'page': page
         }
     return render(request, 'wishlists/product_form.html', context)
 
